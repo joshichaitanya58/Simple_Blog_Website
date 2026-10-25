@@ -3,19 +3,123 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Simple Blog</title>
+  <title>SimpleBlog — Share Your Ideas</title>
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/270d.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <nav>
-    <h1>Simple Blog</h1>
-    <a href="new_post.html" class="btn">New Post</a>
-  </nav>
-  <main id="posts"></main>
 
-  <div class="backgroundimage">
-    <img src="bg.jpg" alt="Background Image">
+  <!-- Sticky Navigation Bar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="brand">
+        <span class="brand-icon">✍️</span>
+        <span>Simple<span class="brand-accent">Blog</span></span>
+      </a>
+      <div class="nav-actions">
+        <a href="new_post.html" class="btn btn-primary">+ Write Post</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section Using bg.jpg -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <span class="hero-badge">✨ Personal Publishing Platform</span>
+        <h1>Share your stories, code & ideas with the world.</h1>
+        <p>Create, edit, and organize your articles right in your browser. Fast, distraction-free, and always accessible.</p>
+        <div class="hero-buttons">
+          <a href="new_post.html" class="btn btn-primary btn-lg">Start Writing</a>
+          <span class="post-stat" id="total-posts-badge">0 Articles Published</span>
+        </div>
+      </div>
+      <div class="hero-image-wrapper">
+        <img src="bg.jpg" alt="Writer working on laptop" class="hero-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Search & Category Filter Bar -->
+  <section class="toolbar-section">
+    <div class="container">
+      <div class="toolbar">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search articles by title or content..." />
+        </div>
+        <div class="category-filters" id="categoryFilters">
+          <button class="filter-chip active" data-category="All">All</button>
+          <button class="filter-chip" data-category="Technology">Technology</button>
+          <button class="filter-chip" data-category="Coding">Coding</button>
+          <button class="filter-chip" data-category="Career">Career</button>
+          <button class="filter-chip" data-category="Lifestyle">Lifestyle</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Blog Posts Feed -->
+  <main class="container main-feed">
+    <div id="posts" class="posts-grid"></div>
+  </main>
+
+  <!-- Edit Post Modal (Replaces browser prompt()) -->
+  <div id="editModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>✏️ Edit Article</h3>
+        <button class="modal-close" id="closeEditModal">✕</button>
+      </div>
+      <form id="editForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="editTitle">Post Title</label>
+            <input type="text" id="editTitle" required />
+          </div>
+          <div class="form-group">
+            <label for="editCategory">Category</label>
+            <select id="editCategory">
+              <option value="Technology">Technology</option>
+              <option value="Coding">Coding</option>
+              <option value="Career">Career</option>
+              <option value="Lifestyle">Lifestyle</option>
+              <option value="General">General</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="editContent">Content</label>
+          <textarea id="editContent" rows="8" required></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" id="cancelEditBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
   </div>
+
+  <!-- Read Full Post Modal -->
+  <div id="readModal" class="modal-overlay">
+    <div class="modal-card modal-read">
+      <div class="modal-header">
+        <span id="readCategory" class="category-badge">Category</span>
+        <button class="modal-close" id="closeReadModal">✕</button>
+      </div>
+      <h2 id="readTitle" class="read-title"></h2>
+      <div id="readMeta" class="read-meta"></div>
+      <div id="readBody" class="read-body"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 SimpleBlog • Built with HTML, CSS & Vanilla JavaScript</p>
+    </div>
+  </footer>
 
   <script src="main.js"></script>
 </body>
